@@ -19,12 +19,13 @@
                         </h2>
                     </div>
                     <div class="body">
-                        <form action="{{ route('admin.tag.store') }}" method="POST" >
+                        <form action="{{ route('admin.tag.update', $tag->id) }}" method="POST" >
                             @csrf
+                            @method('PUT')
                             <label for="name">Tag Name</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter Tag Name">
+                                    <input value="{{ $tag->name }}" type="text" id="name" name="name" class="form-control" placeholder="Enter Tag Name">
                                 </div>
                             </div>
                             <a href="{{ route('admin.tag.index') }}" type="button" class="btn btn-primary m-t-15 waves-effect">Back</a>

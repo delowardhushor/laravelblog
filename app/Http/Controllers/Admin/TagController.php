@@ -81,7 +81,12 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tag = Tag::find($id);
+        $tag->name = $request->name;
+        $tag->slug = str_slug($request->name);
+        $tag->save();
+        Toastr::success('Tag Updated', 'Success');
+        return redirect()->route('admin.tag.index');
     }
 
     /**
