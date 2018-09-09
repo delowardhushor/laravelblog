@@ -32,6 +32,7 @@
                                         <th>Name</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -40,6 +41,7 @@
                                         <th>Name</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
+                                        <th>Action</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -49,6 +51,11 @@
                                         <td>{{ $tag->name }} </td>
                                         <td>{{ $tag->created_at }} </td>
                                         <td>{{ $tag->updated_at }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.tag.edit', $tag->id) }}" class='btn btn-info waves-effect' >
+                                                <i class='material-icons'>edit</i>
+                                            </a>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
