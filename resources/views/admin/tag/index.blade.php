@@ -55,6 +55,11 @@
                                             <a href="{{ route('admin.tag.edit', $tag->id) }}" class='btn btn-info waves-effect' >
                                                 <i class='material-icons'>edit</i>
                                             </a>
+                                            <button onclick="deleteTag({{$tag->id}})" type="button" class="btn btn-danger waves-effect"><i class='material-icons'>delete</i></button>
+                                            <form id="delete-form-{{$tag->id}}" action="{{ route('admin.tag.destroy', $tag->id) }}" method="POST" style="display:none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -84,6 +89,48 @@
 
     <script src="{{ asset('assets/backend/js/pages/tables/jquery-datatable.js') }}"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.28/dist/sweetalert2.all.min.js"></script>
+
+    <script type="text/javascript">
+    
+        function deleteTag(id){
+            const swalWithBootstrapButtons = swal.mixin({
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+            })
+
+            swalWithBootstrapButtons({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+            if (result.value) {
+                event.preventDefault();
+                document.getElementById('delete-form-'+id).submit();
+                // swalWithBootstrapButtons(
+                // 'Deleted!',
+                // 'Your file has been deleted.',
+                // 'success'
+                // )
+            } else if (
+                // Read more about handling dismissals
+                result.dismiss === swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons(
+                'Cancelled',
+                'Your data is safe :)',
+                'error'
+                )
+            }
+            })
+        }
+
+    </script>
 @endpush
 
 
